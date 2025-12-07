@@ -16,7 +16,7 @@ The deployed system uses the **MLP model** inside a Streamlit web application to
 Historical stock price data was collected through **Yahoo Finance (yfinance)**.
 
 ### Tickers used:
-AAPL, MSFT, AMZN, GOOGL, META, TSLA, SPY
+All S&P 500 stocks
 
 For each stock, we retrieved daily OHLCV values and computed:
 
@@ -73,8 +73,8 @@ The training notebook performs:
 notebooks/training.ipynb
 
 ### Final Accuracy (representative runs):
-- **MLP:** ~0.53–0.56  
-- **LSTM:** ~0.54  
+- **MLP:** ~0.545 
+- **LSTM:** ~0.53  
 
 These values are realistic because short-term stock movement is highly noisy and near-random.
 
