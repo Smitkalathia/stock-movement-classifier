@@ -1,95 +1,149 @@
-#  Stock Movement Prediction Using Neural Networks  
+# Stock Movement Prediction Using Neural Networks  
 CSCI 4050U — Machine Learning Final Project
 
-##  Overview  
+---
+
+## Overview  
 This project predicts **next-day stock movement** (UP or DOWN) using the past **20 days of daily returns**.  
 Two neural network architectures were trained:
 
 - **Multilayer Perceptron (MLP)**  
-- **Long Short-Term Memory Network (LSTM)**  
+- **Long Short-Term Memory (LSTM)**  
 
 The deployed system uses the **MLP model** inside a Streamlit web application to make real-time predictions using live market data.
 
 ---
 
-##  Dataset  
-Historical stock price data was collected through **Yahoo Finance (yfinance)**.
+## Dataset  
+Historical stock price data was collected using **Yahoo Finance (yfinance)**.
 
 ### Tickers used:
-All S&P 500 stocks
-
-For each stock, we retrieved daily OHLCV values and computed:
+All **S&P 500 companies**.
 
 ### Daily Return:
-Return_t = (Close_t - Close_(t−1)) / Close_(t−1)
+```
+Return_t = (Close_t − Close_(t−1)) / Close_(t−1)
+```
 
 ### Target Label:
 - `1` → next-day return > 0  
 - `0` → next-day return ≤ 0  
 
-Data was cleaned, merged, and used to create 20-day sliding windows for training.
+After cleaning and merging data, 20-day sliding windows were generated for training.
 
 ---
 
-##  Model Architectures
+## Model Architectures
 
-### **1. Multilayer Perceptron (MLP)**  
-Input dimension: **20 (20-day window of returns)**
+### 1. Multilayer Perceptron (MLP)
+
+**Input:** 20-day window of returns  
 
 Architecture:
+```
 Linear(20 → 128)
 ReLU
 Dropout(0.2)
 Linear(128 → 64)
 ReLU
 Linear(64 → 1)
-Sigmoid → Probability of next-day price increase
+Sigmoid  → probability of next-day price increase
+```
 
 ---
 
-### **2. Long Short-Term Memory (LSTM)**  
-Input shape: `(batch_size, 20, 1)`
+### 2. Long Short-Term Memory (LSTM)
+
+**Input:** (batch_size, 20, 1)
 
 Architecture:
-LSTM(input_size=1 → hidden_size=64)
+```
+LSTM(1 → hidden_size=64)
 Linear(64 → 1)
-Sigmoid → Probability of next-day increase
+Sigmoid → probability of next-day increase
+```
 
 ---
 
-##  Training Pipeline
+## Training Pipeline
 
-The training notebook performs:
+The notebook performs:
 
 1. Downloading and cleaning stock data  
-2. Computing daily returns  
-3. Building 20-day sliding windows  
-4. Splitting into Train / Validation / Test sets  
-5. Training both MLP and LSTM  
-6. Evaluating model accuracy  
+2. Calculating daily returns  
+3. Creating 20-day sliding windows  
+4. Splitting Train / Validation / Test  
+5. Training MLP and LSTM models  
+6. Evaluating accuracy  
 7. Saving model weights for deployment  
 
-### Training notebook:
+Training located here:
+```
 notebooks/training.ipynb
+```
 
-### Final Accuracy (representative runs):
-- **MLP:** ~0.545 
+### Accuracy (Typical Results)
+- **MLP:** ~0.545  
 - **LSTM:** ~0.53  
 
-These values are realistic because short-term stock movement is highly noisy and near-random.
+These are realistic because short-term stock movements are nearly random.
 
 ---
 
-##  Deployment (Streamlit App)
+## How to Run the Application
 
-A Streamlit-based web app deploys the trained MLP model.
+Follow the steps below to run the Streamlit stock prediction app locally.
 
-### Run the app locally:
+---
 
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Smitkalathia/stock-movement-classifier.git
+cd stock-movement-classifier
+```
+
+---
+
+### 2. Create a Virtual Environment (Recommended)
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+**Windows**
+```bash
+venv\Scripts\activate
+```
+
+**Mac/Linux**
+```bash
+source venv/bin/activate
+```
+
+---
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4. Run the Streamlit App
 ```bash
 python -m streamlit run deployment/app.py
 ```
-##  App Features
+
+This will open:
+```
+http://localhost:8501
+```
+
+---
+
+## App Features
 
 - Fetches recent OHLCV data for any ticker  
 - Computes a 20-day return window  
@@ -97,71 +151,69 @@ python -m streamlit run deployment/app.py
 - Outputs:
   - Probability the stock will go **UP** tomorrow  
   - **BUY / DON'T BUY** recommendation  
-- Displays a graph of recent price trends  
+- Displays recent price graph  
 
 ---
 
-##  Repository Structure
+## Repository Structure
 
- stock_project
+```
+stock_project
 ├── deployment/
-│ └── app.py # Streamlit application
+│   └── app.py                     # Streamlit application
 │
 ├── models/
-│ └── saved_weights/
-│ ├── mlp_weights.pth # Trained MLP model weights
-│ └── lstm_weights.pth # Optional: trained LSTM weights
+│   └── saved_weights/
+│       ├── mlp_weights.pth        # Trained MLP model weights
+│       └── lstm_weights.pth       # Optional: LSTM model weights
 │
 ├── notebooks/
-│ └── training.ipynb # Full training notebook
+│   └── training.ipynb             # Full training notebook
 │
-├── requirements.txt # Project dependencies
-└── README.md # Documentation
+├── requirements.txt               # Project dependencies
+└── README.md                      # Documentation
+```
 
 ---
 
-##  Deliverables
+## Deliverables
 
-This project includes:
-
-- GitHub Repository (public)  
-- Training Notebook (Jupyter)  
+- Public GitHub Repository  
+- Jupyter Training Notebook  
 - Trained Model Weights  
 - Streamlit Demo Application  
 - Presentation Slides (PDF)  
-- YouTube Demo Video (max 10 minutes)  
+- YouTube Demo Video (≤ 10 minutes)
 
-links:
-YouTube Demo: <insert link>
-Slides (PDF): <insert link>
-
+Links:
+- YouTube Demo: `<insert link>`  
+- Slides (PDF): `<insert link>`  
 
 ---
 
-##  Team
+## Team
 
 - **Smit Kalathia**  
-- **Samir Ahmadi**
+- **Samir Ahmadi**  
 - **Kyle Liao**
 
 ---
 
-##  Disclaimer
-
+## Disclaimer
 This project is for **academic purposes only**.  
-Stock predictions are inherently uncertain and should **not** be used for real financial decisions.
+Stock predictions are uncertain and should **not** be used for real-world financial decisions.
 
 ---
 
-##  Summary
+## Summary
 
-This project demonstrates a complete machine learning workflow:
+This project demonstrates a full ML workflow:
 
 - Data acquisition  
 - Feature engineering  
 - Neural network training  
-- Model evaluation  
-- Deployment through a web interface  
+- Evaluation and model selection  
+- Deployment using Streamlit  
 
-It provides a practical example of integrating ML models into real-world applications.
+It provides a real example of integrating trained neural models into a usable application.
 
