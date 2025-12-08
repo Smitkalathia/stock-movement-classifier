@@ -127,6 +127,60 @@ http://localhost:8501
 ```
 
 ---
+## How to Retrain the Models (MLP + LSTM)
+
+If you want to retrain the models from scratch using fresh market data:
+
+### 1. Navigate to the Training Notebook
+
+Open:
+
+notebooks/training.ipynb
+
+---
+
+### 2. Update Ticker List (Optional)
+
+Inside the notebook (2. Parameters), you can modify:
+```bash
+TOP50 = [
+    "AAPL", "MSFT", "AMZN", "NVDA", "GOOGL", "GOOG", "META", "TSLA", "BRK-B", "UNH",
+    "XOM", "JPM", "JNJ", "V", "PG", "LLY", "HD", "MA", "CVX", "AVGO",
+    "COST", "PEP", "PFE", "KO", "MRK", "ABBV", "WMT", "BAC", "TMO", "DIS",
+    "ADBE", "CSCO", "CRM", "MCD", "ACN", "LIN", "ABT", "ORCL", "NKE", "DHR",
+    "CMCSA", "TXN", "NEE", "WFC", "PM", "VZ", "RTX", "UPS", "INTC", "AMD"
+]
+```
+
+---
+
+### 3. Run All Cells
+
+The notebook will automatically:
+
+- download stock data using yfinance
+- clean and preprocess the dataset
+- build 20-day sliding window features
+- train both MLP and LSTM models
+- evaluate validation and test accuracy
+- save new weights into:
+
+models/saved_weights/
+
+Saved files:
+
+mlp_weights.pth  
+lstm_weights.pth
+
+---
+
+### 4. Restart the Streamlit App
+
+After retraining, restart the app to load the new weights:
+```bash
+python -m streamlit run deployment/app.py
+```
+---
 
 ## App Features
 
@@ -140,26 +194,6 @@ http://localhost:8501
 
 ---
 
-## Repository Structure
-
-```
-stock_project
-├── deployment/
-│   └── app.py                     # Streamlit application
-│
-├── models/
-│   └── saved_weights/
-│       ├── mlp_weights.pth        # Trained MLP model weights
-│       └── lstm_weights.pth       # Optional: LSTM model weights
-│
-├── notebooks/
-│   └── training.ipynb             # Full training notebook
-│
-├── requirements.txt               # Project dependencies
-└── README.md                      # Documentation
-```
-
----
 
 ## Deliverables
 
@@ -172,7 +206,7 @@ stock_project
 
 Links:
 - YouTube Demo: `<https://youtu.be/gIxla0uDFkg>`  
-- Slides (Link): `<https://docs.google.com/presentation/d/1Y23ouckxYf783lTlpiK5eo7d4DBdxKcdZ7INneopJ_A/edit?usp=sharing>`  
+- Slides (Link): [Click here to view the presentation](Presentation.pdf)
 
 ---
 
