@@ -172,7 +172,7 @@ stock_project
 
 Links:
 - YouTube Demo: `<https://youtu.be/gIxla0uDFkg>`  
-- Slides (PDF): `<insert link>`  
+- Slides (PDF): `<https://docs.google.com/presentation/d/1Y23ouckxYf783lTlpiK5eo7d4DBdxKcdZ7INneopJ_A/edit?usp=sharing>`  
 
 ---
 
