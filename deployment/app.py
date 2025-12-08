@@ -116,7 +116,8 @@ if st.button("Predict"):
         st.line_chart(data["Close"].tail(30))
 
         st.subheader("📊 Prediction Result")
-        st.write(f"**Probability stock goes UP tomorrow:** `{prob:.3f}`")
+        st.write(f"**Probability stock goes UP tomorrow: {prob * 100:.2f}%**")
+
 
         if prob >= 0.5:
             st.success("Model Suggests: **BUY** (Upward movement expected)")

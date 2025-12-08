@@ -18,7 +18,13 @@ The deployed system uses the **MLP model** inside a Streamlit web application to
 Historical stock price data was collected using **Yahoo Finance (yfinance)**.
 
 ### Tickers used:
-All **S&P 500 companies**.
+TOP50 = [
+    "AAPL", "MSFT", "AMZN", "NVDA", "GOOGL", "GOOG", "META", "TSLA", "BRK-B", "UNH",
+    "XOM", "JPM", "JNJ", "V", "PG", "LLY", "HD", "MA", "CVX", "AVGO",
+    "COST", "PEP", "PFE", "KO", "MRK", "ABBV", "WMT", "BAC", "TMO", "DIS",
+    "ADBE", "CSCO", "CRM", "MCD", "ACN", "LIN", "ABT", "ORCL", "NKE", "DHR",
+    "CMCSA", "TXN", "NEE", "WFC", "PM", "VZ", "RTX", "UPS", "INTC", "AMD"
+]
 
 ### Daily Return:
 ```
@@ -103,35 +109,14 @@ cd stock-movement-classifier
 ```
 
 ---
-
-### 2. Create a Virtual Environment (Recommended)
-
-```bash
-python -m venv venv
-```
-
-Activate it:
-
-**Windows**
-```bash
-venv\Scripts\activate
-```
-
-**Mac/Linux**
-```bash
-source venv/bin/activate
-```
-
----
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-### 4. Run the Streamlit App
+### 3. Run the Streamlit App
 ```bash
 python -m streamlit run deployment/app.py
 ```
