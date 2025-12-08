@@ -171,7 +171,7 @@ stock_project
 - YouTube Demo Video (≤ 10 minutes)
 
 Links:
-- YouTube Demo: `<insert link>`  
+- YouTube Demo: `<https://youtu.be/gIxla0uDFkg>`  
 - Slides (PDF): `<insert link>`  
 
 ---
